@@ -1,0 +1,26 @@
+<h1>Top#index</h1>
+<p>Find me in app/views/top/index.html.erb</p>
+
+<div class="event-user">
+  <h3>Event::User</h3>
+  <p>
+  <% if user_signed_in? %>
+    <%= current_user.email %>
+    <%= link_to 'SignOut', destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to 'SignIn', new_user_session_path %>
+  <% end %>
+  </p>
+</div>
+
+<div class="event-admin-user">
+  <h3>Event::Admin::User</h3>
+  <p>
+  <% if admin_user_signed_in? %>
+    <%= current_admin_user.email %>
+    <%= link_to 'SignOut', destroy_admin_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to 'SignIn', new_admin_user_session_path %>
+  <% end %>
+  </p>
+</div>
