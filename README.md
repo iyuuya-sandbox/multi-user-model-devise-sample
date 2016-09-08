@@ -1,24 +1,30 @@
-# README
+# Deviseで複数モデルのユーザー認証をするときのサンプル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Ruby: 2.3.1
+- Rails: 5.0.0.1
 
-Things you may want to cover:
+## Model
 
-* Ruby version
+名前空間があっても大丈夫か気になったので適当にEventを付けた。
 
-* System dependencies
+- Event::User : 一般ユーザー
+- Event::Admin::User : 管理ユーザー
 
-* Configuration
+## Routing
 
-* Database creation
+```ruby
+  devise_for :users, class_name: "Event::User"
 
-* Database initialization
+  namespace :admin do
+    devise_for :users, class_name: "Event::Admin::User"
+  end
+```
 
-* How to run the test suite
+## Devise (config/initializers/devise.rb)
 
-* Services (job queues, cache servers, search engines, etc.)
+Controller, View, SignOut時のSessionを切り分けたい
 
-* Deployment instructions
-
-* ...
+```ruby
+  config.scoped_views = true
+  config.sign_out_all_scopes = false
+```
